@@ -4,7 +4,7 @@
 - [лаба 1](https://github.com/varrennnikk/python/blob/лабы/лабы/лаба1) - Лабораторная работа 1
 - [лаба 2](https://github.com/varrennnikk/python/blob/лабы/лабы/лаба2) - Лабораторная работа 2
 - [лаба 3](https://github.com/varrennnikk/python/blob/лабы/лабы/лаба3) - Лабораторная работа 3
-- [лаба 4](https://github.com/varrennnikk/python/blob/лабы/лабы/лаба1) - Лабораторная работа 4
+- [лаба 4](https://github.com/varrennnikk/python/blob/лабы/лабы/лаба4) - Лабораторная работа 4
 
 ---
 
