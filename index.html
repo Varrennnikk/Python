@@ -19,9 +19,8 @@
 <!-- /Yandex.Metrika counter -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python</title>
+     <title>Тайны Python</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
              --blood-red: #8B0000;
@@ -41,41 +40,30 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #4E0A0A, #333);
+            color: #D3D3D3;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--dark-red), var(--gothic-grey));
-            color: var(--pale-grey);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1.6;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
         
         header {
-            padding: 30px 20px;
-            text-align: center;
-            background: rgba(78, 10, 10, 0.85);
             width: 100%;
+            background: rgba(78, 10, 10, 0.85);
+            text-align: center;
+            padding: 30px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 10;
-            border-bottom: 1px solid rgba(211, 211, 211, 0.1);
         }
-                 header h1 {
-            margin: 0;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
+
+        header h1 {
+            font-size: 2.5rem;
             font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(to right, var(--crimson), var(--pale-grey));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: crimson;
             letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
         }
         
         header h1::after {
@@ -90,31 +78,21 @@
             border-radius: 3px;
         }
         
-        nav {
+nav {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            background: rgba(78, 10, 10, 0.95);
-            padding: 10px;
             width: 100%;
+            padding: 10px;
+            background: rgba(78, 10, 10, 0.95);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 9;
         }
-        
+
         nav a {
-            color: var(--pale-grey);
+            color: #D3D3D3;
             text-decoration: none;
             padding: 10px 15px;
-            margin: 5px;
-            border-radius: 30px;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease, transform 0.2s ease;
+            transition: 0.3s ease;
         }
         
         nav a::before {
@@ -129,9 +107,8 @@
         }
         
         nav a:hover {
-            background-color: rgba(220, 20, 60, 0.6);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
+            background-color: crimson;
+            border-radius: 5px;
             color: white;
         }
         
@@ -144,16 +121,11 @@
             box-shadow: 0 4px 15px rgba(220, 20, 60, 0.6);
         }
         
-        main {
-            width: 95%;
+   main {
+            width: 90%;
             max-width: 1200px;
-            margin: 30px auto;
-            opacity: 1;
-            animation: fadeIn 0.8s ease-out;
-            position: relative;
-            z-index: 5;
-            flex: 1;
-            padding: 0 10px;
+            margin: 40px auto;
+            text-align: center;
         }
         
         @keyframes fadeIn {
@@ -220,10 +192,6 @@
             padding: 25px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            overflow: hidden;
         }
         
         .section::before {
@@ -237,20 +205,16 @@
         }
         
         .section h2 {
-            margin-top: 0;
-            color: var(--crimson);
-            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: crimson;
+            font-size: 2rem;
             font-family: 'Playfair Display', serif;
-            border-bottom: 3px solid var(--blood-red);
-            padding-bottom: 10px;
+            border-bottom: 3px solid crimson;
             display: inline-block;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
         }
-        
+
         .section p {
-            font-size: clamp(1rem, 3vw, 1.15rem);
-            margin-bottom: 20px;
+            font-size: 1.2rem;
         }
         
         .section a {
@@ -281,24 +245,17 @@
             width: 100%;
         }
         
-        footer {
-            margin-top: auto;
-            text-align: center;
+footer {
+            width: 100%;
             background: rgba(78, 10, 10, 0.95);
             padding: 20px;
-            width: 100%;
+            text-align: center;
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 5;
-            border-top: 1px solid rgba(211, 211, 211, 0.1);
         }
-        
+
         footer p {
-            margin: 0;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            color: var(--pale-grey);
-            letter-spacing: 0.5px;
+            color: #D3D3D3;
+            font-size: 1rem;
         }
         
         .hidden {
