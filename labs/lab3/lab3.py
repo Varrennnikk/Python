@@ -1,50 +1,39 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn import datasets
+from sklearn.datasets import load_iris #Example for Assignment 1
 
-# Задание 1: Диаграмма рассеяния
+# Задание 1: Диаграмма рассеяния (используем пример iris)
+iris = load_iris()
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target
 
-# Загрузка данных (пример с использованием iris dataset)
-iris = datasets.load_iris()
-iris_df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
-iris_df['target'] = iris.target
-
-# Выбор факторов и классов
-x_factor = 'sepal length (cm)'
-y_factor = 'sepal width (cm)'
-class_column = 'target'
-
-# Построение диаграммы рассеяния
 plt.figure(figsize=(8, 6))
-sns.scatterplot(x=x_factor, y=y_factor, hue=class_column, data=iris_df, palette='viridis')
-plt.xlabel(x_factor)
-plt.ylabel(y_factor)
-plt.title('Диаграмма рассеяния для Iris Dataset')
+for i in range(len(iris.target_names)):
+    subset = df[df['target'] == i]
+    plt.scatter(subset['petal length (cm)'], subset['petal width (cm)'],
+                label=iris.target_names[i])
+
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Petal Width (cm)')
+plt.title('Iris Petal Sizes')
 plt.legend()
-plt.grid(True)
 plt.show()
 
 
 # Задание 2: График временных рядов (пример с синтетическими данными)
+dates = pd.date_range('1950-01-01', periods=100, freq='YS') #Year start
+series1 = [x + (x*x*0.01) for x in range(20,120)]
+series2 = [x + (x*x*0.002) for x in range(5, 105)]
 
-# Создание данных временных рядов
-dates = pd.date_range('2023-01-01', periods=100, freq='D')
-series1 = [i*1.1 + 5*(-1)**i for i in range(100)]
-series2 = [i*0.9 + 3*(-1)**i for i in range(100)]
+df_ts = pd.DataFrame({'date': dates, 'series1': series1, 'series2':series2})
 
-time_series_df = pd.DataFrame({'Date': dates, 'Series1': series1, 'Series2': series2})
-time_series_df.set_index('Date', inplace=True)
 
-# Построение графика временных рядов
 plt.figure(figsize=(10, 6))
-plt.plot(time_series_df.index, time_series_df['Series1'], label='Series 1')
-plt.plot(time_series_df.index, time_series_df['Series2'], label='Series 2')
-plt.xlabel('Дата')
-plt.ylabel('Значение')
-plt.title('График временных рядов')
+plt.plot(df_ts['date'], df_ts['series1'], label='Series 1')
+plt.plot(df_ts['date'], df_ts['series2'], label='Series 2')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.title('Time Series Example')
 plt.legend()
 plt.grid(True)
-plt.xticks(rotation=45)
-plt.tight_layout()  # Чтобы метки не перекрывались
 plt.show()
