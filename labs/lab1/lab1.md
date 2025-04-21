@@ -59,4 +59,4 @@
 
 ## Код
 
-(https://github.com/varrennnikk/Python/лабы/labs/lab1/lab1.py)
+[Лаба 1](https://github.com/varrennnikk/Python/labs/lab1/lab1.py)
