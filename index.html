@@ -829,32 +829,6 @@
                 top: 0,
                 behavior: 'smooth'
             });
-            
-            // Добавляем эффект волны при переключении
-            if (sectionId !== 'home') {
-                const waveEffect = document.createElement('div');
-                waveEffect.className = 'ocean-waves';
-                waveEffect.style.position = 'absolute';
-                waveEffect.style.bottom = '0';
-                waveEffect.style.left = '0';
-                waveEffect.style.width = '100%';
-                waveEffect.style.height = '100px';
-                waveEffect.style.animation = 'wave 3s ease-out';
-                waveEffect.style.opacity = '0';
-                waveEffect.style.zIndex = '10';
-                
-                document.getElementById(sectionId).appendChild(waveEffect);
-                
-                setTimeout(() => {
-                    waveEffect.style.opacity = '0.3';
-                    setTimeout(() => {
-                        waveEffect.style.opacity = '0';
-                        setTimeout(() => {
-                            waveEffect.remove();
-                        }, 1000);
-                    }, 3000);
-                }, 10);
-            }
         }
         
         
