@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-     <!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --deep-blue: #005b96;
-            --ocean-blue: #0077b6;
-            --light-blue: #00b4d8;
-            --sky-blue: #90e0ef;
-            --foam: #caf0f8;
+             --blood-red: #8B0000;
+            --dark-red: #4E0A0A;
+            --pale-grey: #D3D3D3;
+            --crimson: #DC143C;
+            --gothic-grey: #333;
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --wave-height: 120px;
+            --cobweb-height: 120px;
             --mobile-breakpoint: 768px;
         }
         
@@ -43,8 +43,8 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--deep-blue), var(--ocean-blue));
-            color: white;
+            background: linear-gradient(135deg, var(--dark-red), var(--gothic-grey));
+            color: var(--pale-grey);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -56,21 +56,20 @@
         header {
             padding: 30px 20px;
             text-align: center;
-            background: rgba(0, 91, 150, 0.85);
+            background: rgba(78, 10, 10, 0.85);
             width: 100%;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(8px);
             position: relative;
             z-index: 10;
-            border-bottom: 1px solid rgba(202, 240, 248, 0.1);
-                    }
-        
-        header h1 {
+            border-bottom: 1px solid rgba(211, 211, 211, 0.1);
+        }
+                 header h1 {
             margin: 0;
             font-size: clamp(1.8rem, 5vw, 2.8rem);
             font-family: 'Playfair Display', serif;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(to right, var(--sky-blue), var(--foam));
+            background: linear-gradient(to right, var(--crimson), var(--pale-grey));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -87,7 +86,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: linear-gradient(to right, var(--light-blue), var(--sky-blue));
+            background: linear-gradient(to right, var(--blood-red), var(--crimson));
             border-radius: 3px;
         }
         
@@ -95,7 +94,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            background: rgba(0, 119, 182, 0.95);
+            background: rgba(78, 10, 10, 0.95);
             padding: 10px;
             width: 100%;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
@@ -105,7 +104,7 @@
         }
         
         nav a {
-            color: var(--foam);
+            color: var(--pale-grey);
             text-decoration: none;
             padding: 10px 15px;
             margin: 5px;
@@ -130,9 +129,9 @@
         }
         
         nav a:hover {
-            background-color: rgba(0, 180, 216, 0.6);
+            background-color: rgba(220, 20, 60, 0.6);
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.5);
+            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
             color: white;
         }
         
@@ -141,8 +140,8 @@
         }
         
         nav a.active {
-            background-color: var(--light-blue);
-            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.6);
+            background-color: var(--crimson);
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.6);
         }
         
         main {
@@ -171,7 +170,7 @@
         }
         
         .buttons button {
-            background: linear-gradient(135deg, var(--light-blue), var(--ocean-blue));
+            background: linear-gradient(135deg, var(--crimson), var(--dark-red));
             color: white;
             border: none;
             padding: 15px 25px;
@@ -203,8 +202,8 @@
         
         .buttons button:hover {
             transform: translateY(-7px) scale(1.03);
-            box-shadow: 0 12px 30px rgba(0, 180, 216, 0.5);
-            background: linear-gradient(135deg, var(--sky-blue), var(--light-blue));
+            box-shadow: 0 12px 30px rgba(220, 20, 60, 0.5);
+            background: linear-gradient(135deg, var(--blood-red), var(--crimson));
         }
         
         .buttons button:hover::after {
@@ -216,7 +215,7 @@
         }
         
         .section {
-            background: rgba(0, 91, 150, 0.75);
+            background: rgba(78, 10, 10, 0.75);
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 30px;
@@ -234,42 +233,28 @@
             right: 0;
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle, rgba(144, 224, 239, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
         }
         
         .section h2 {
             margin-top: 0;
-            color: var(--sky-blue);
+            color: var(--crimson);
             font-size: clamp(1.5rem, 5vw, 2rem);
             font-family: 'Playfair Display', serif;
-            border-bottom: 3px solid var(--light-blue);
+            border-bottom: 3px solid var(--blood-red);
             padding-bottom: 10px;
             display: inline-block;
             letter-spacing: 0.5px;
             margin-bottom: 20px;
         }
         
-        .section h3 { /* Добавлен стиль для h3 */
-            margin-top: 0;
-            color: var(--sky-blue);
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-        
         .section p {
             font-size: clamp(1rem, 3vw, 1.15rem);
             margin-bottom: 20px;
         }
-
-        .section ul, .section ol { /* Добавлены стили для списков */
-            padding-left: 25px;
-            margin-bottom: 20px;
-        }
         
         .section a {
-            color: var(--sky-blue);
+            color: var(--crimson);
             text-decoration: none;
             font-weight: 600;
             position: relative;
@@ -283,13 +268,13 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--sky-blue);
+            background: var(--crimson);
             transition: var(--transition);
         }
         
         .section a:hover {
-            color: var(--foam);
-            text-shadow: 0 0 5px rgba(202, 240, 248, 0.5);
+            color: var(--pale-grey);
+            text-shadow: 0 0 5px rgba(211, 211, 211, 0.5);
         }
         
         .section a:hover::after {
@@ -299,20 +284,20 @@
         footer {
             margin-top: auto;
             text-align: center;
-            background: rgba(0, 91, 150, 0.95);
+            background: rgba(78, 10, 10, 0.95);
             padding: 20px;
             width: 100%;
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(8px);
             position: relative;
             z-index: 5;
-            border-top: 1px solid rgba(202, 240, 248, 0.1);
+            border-top: 1px solid rgba(211, 211, 211, 0.1);
         }
         
         footer p {
             margin: 0;
             font-size: clamp(0.9rem, 3vw, 1.1rem);
-            color: var(--foam);
+            color: var(--pale-grey);
             letter-spacing: 0.5px;
         }
         
@@ -321,26 +306,73 @@
             opacity: 0;
         }
         
-        .ocean-waves:nth-child(2) {
+        /* Анимация паутины для фона */
+        .cobweb {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--cobweb-height);
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(211, 211, 211, 0.25)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: repeat-x;
+            z-index: 1;
+            animation: cobweb 15s linear infinite;
+        }
+        
+        .cobweb:nth-child(2) {
             bottom: -20px;
             opacity: 0.5;
-            animation: wave 12s linear infinite reverse;
-            height: calc(var(--wave-height) + 20px);
+            animation: cobweb 12s linear infinite reverse;
+            height: calc(var(--cobweb-height) + 20px);
         }
         
-        .ocean-waves:nth-child(3) {
+        .cobweb:nth-child(3) {
             bottom: -40px;
             opacity: 0.3;
-            animation: wave 18s linear infinite;
-            height: calc(var(--wave-height) + 40px);
+            animation: cobweb 18s linear infinite;
+            height: calc(var(--cobweb-height) + 40px);
         }
         
-        @keyframes wave {
+        @keyframes cobweb {
             0% { background-position-x: 0; }
             100% { background-position-x: 1440px; }
         }
         
-        @keyframes float {
+        /* Декоративные элементы */
+        .bat {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(211, 211, 211, 0.15);
+            z-index: -1;
+        }
+        
+        .bat-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 5%;
+            animation: fly 12s ease-in-out infinite;
+        }
+        
+        .bat-2 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 8%;
+            animation: fly 15s ease-in-out infinite reverse;
+        }
+        
+        .bat-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 30%;
+            left: 10%;
+            animation: fly 20s ease-in-out infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes fly {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
         }
@@ -354,11 +386,11 @@
         }
         
         .card {
-            background: rgba(0, 119, 182, 0.6);
+            background: rgba(78, 10, 10, 0.6);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(202, 240, 248, 0.1);
+            border: 1px solid rgba(211, 211, 211, 0.1);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -367,11 +399,11 @@
         .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            background: rgba(0, 119, 182, 0.8);
+            background: rgba(78, 10, 10, 0.8);
         }
         
         .card h3 {
-            color: var(--sky-blue);
+            color: var(--crimson);
             margin-top: 0;
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.2rem, 3vw, 1.5rem);
@@ -393,7 +425,7 @@
             right: -50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(144, 224, 239, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
             transition: all 0.6s ease;
         }
         
@@ -407,17 +439,17 @@
             display: inline-block;
             margin: 8px 12px 8px 0;
             padding: 10px 15px;
-            background: rgba(0, 119, 182, 0.4);
+            background: rgba(78, 10, 10, 0.4);
             border-radius: 6px;
-            border-left: 4px solid var(--light-blue);
+            border-left: 4px solid var(--blood-red);
             transition: all 0.3s ease;
             font-size: clamp(0.8rem, 3vw, 0.9rem);
         }
         
         .code-link:hover {
-            background: rgba(0, 119, 182, 0.7);
+            background: rgba(78, 10, 10, 0.7);
             transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
         }
         
         /* Мобильное меню */
@@ -449,7 +481,7 @@
                 left: 0;
                 width: 100%;
                 height: 100vh;
-                background: rgba(0, 91, 150, 0.95);
+                background: rgba(78, 10, 10, 0.95);
                 z-index: 15;
                 padding-top: 80px;
                 align-items: center;
@@ -483,11 +515,11 @@
                 grid-template-columns: 1fr;
             }
             
-            .bubble-1, .bubble-2, .bubble-3 {
+            .bat-1, .bat-2, .bat-3 {
                 display: none;
             }
             
-            .ocean-waves {
+            .cobweb {
                 height: 80px;
             }
         }
@@ -509,13 +541,22 @@
     </style>
 </head>
 <body>
+    <!-- Декоративные элементы -->
+    <div class="bat bat-1"></div>
+    <div class="bat bat-2"></div>
+    <div class="bat bat-3"></div>
+    
+    <!-- Паутина -->
+    <div class="cobweb"></div>
+    <div class="cobweb"></div>
+    <div class="cobweb"></div>
     
     <button class="mobile-menu-btn" id="mobileMenuBtn">
         <i class="fas fa-bars"></i>
     </button>
     
     <header>
-        <h1>Python</h1>
+        <h1>Вампирские тайны Python</h1>
     </header>
     <nav id="mainNav">
         <a href="#" onclick="showSection('home')" class="active">Главная</a>
@@ -527,8 +568,8 @@
     <main>
         <!-- Главная страница -->
         <div id="home" class="section">
-            <h2>Исследуйте лабораторные работы</h2>
-            <p>Выберите лабораторную работу, чтобы начать своё погружение в глубины кода.</p>
+            <h2>Раскройте древние знания лабораторных работ</h2>
+            <p>Добро пожаловать в логово вампирского программирования на Python. Выберите лабораторную работу, чтобы исследовать тайны кода.</p>
             
             <div class="buttons">
                 <button onclick="showSection('laba1')">
@@ -537,8 +578,7 @@
                 <button onclick="showSection('laba2')">
                     <i class="fas fa-vial"></i> Лаба 2
                 </button>
-                <button onclick="showSection('laba3')">
-                    <i class="fas fa-atom"></i> Лаба 3
+                <button onclick="showSection('laba3')"><i class="fas fa-atom"></i> Лаба 3
                 </button>
                 <button onclick="showSection('laba4')">
                     <i class="fas fa-microscope"></i> Лаба 4
@@ -565,13 +605,13 @@
             </div>
         </div>
         
-       <!-- Лаба 1 -->
+         <!-- Лаба 1 -->
         <div id="laba1" class="section hidden">
             <h2>Лабораторная работа 1: Подсчёт точечных мутаций</h2>
             
             <h3>Цель работы</h3>
             <p>Разработка программы для вычисления расстояния Хэмминга между двумя строками ДНК равной длины.</p>
-              
+            
             <h3>Задачи</h3>
             <ul>
                 <li>Изучить понятие расстояния Хэмминга и его применение в биоинформатике.</li>
@@ -607,7 +647,7 @@
             <ul>
                 <li><b>Ошибка:</b> Отсутствие проверки на равенство длин строк.
                     <b>Исправление:</b> Добавление в код проверки <code>if len(s) != len(t):</code> и вывод сообщения об ошибке, если строки имеют разную длину, с прекращением работы функции.</li>
-                    <li><b>Ошибка:</b> Неправильный подсчет расстояния при несовпадении символов.
+<li><b>Ошибка:</b> Неправильный подсчет расстояния при несовпадении символов.
                     <b>Исправление:</b> Убедиться, что переменная <code>distance</code> инкрементируется (<code>distance += 1</code>) внутри условия <code>if s[i] != t[i]:</code>.</li>
                 <li><b>Ошибка:</b> Использование неправильных индексов при обращении к символам строк.
                     <b>Исправление:</b> Проверка, что индекс <code>i</code> внутри цикла <code>for</code> не выходит за пределы длин строк. В приведённом выше коде эта ошибка отсутствует, так как цикл <code>for i in range(len(s)):</code> гарантирует корректный перебор индексов.</li>
@@ -618,110 +658,87 @@
             <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/Лаба-1%20в1.py" target="_blank" class="code-link">Скачать код Лабораторной 1</a>
         </div>
         
-        <!-- Лаба 1 -->
-        <div id="laba1" class="section hidden">
-            <h2>Лабораторная работа 1: Подсчёт точечных мутаций</h2>
+        <!-- Лаба 2 -->
+        <div id="laba2" class="section hidden">
+            <h2>Лабораторная работа 2</h2>
+            <p>Вычисление GC-состава.</p>
             
-            <h3>Цель работы</h3>
-            <p>Разработка программы для вычисления расстояния Хэмминга между двумя строками ДНК равной длины.</p>
-              
-            <h3>Задачи</h3>
-            <ul>
-                <li>Изучить понятие расстояния Хэмминга и его применение в биоинформатике.</li>
-                <li>Реализовать алгоритм для вычисления расстояния Хэмминга между двумя строками ДНК.</li>
-                <li>Протестировать реализованную программу с использованием предоставленных входных данных.</li>
-                <li>Оформить отчёт о проделанной работе.</li>
-            </ul>
-            
-            <h3>Инструменты и алгоритмы</h3>
-            <p><b>Инструменты:</b></p>
-            <ul>
-                <li>Язык программирования: Python.</li>
-                <li>IDE: Visual Studio Code, PyCharm.</li>
-            </ul>
-            <p><b>Алгоритм:</b></p>
-            <ol>
-                <li>Ввод данных: Получение двух строк ДНК (s и t) равной длины.</li>
-                <li>Проверка длины: Убедиться, что длина обеих строк совпадает. Если нет - сообщить об ошибке и остановить выполнение.</li>
-                <li>Вычисление расстояния Хэмминга:
-                    <ul>
-                        <li>Инициализация переменной <code>distance</code> значением 0.</li>
-                        <li>Цикл по символам строк:
-                            <ul>
-                                <li>Если символы на текущей позиции в строках <code>s</code> и <code>t</code> не совпадают, увеличить значение <code>distance</code> на 1.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>Вывод результата: Вывод значения переменной <code>distance</code> в качестве расстояния Хэмминга.</li>
-            </ol>
-            
-            <h3>Ошибки и исправления</h3>
-            <ul>
-                <li><b>Ошибка:</b> Отсутствие проверки на равенство длин строк.
-                    <b>Исправление:</b> Добавление в код проверки <code>if len(s) != len(t):</code> и вывод сообщения об ошибке, если строки имеют разную длину, с прекращением работы функции.</li>
-                    <li><b>Ошибка:</b> Неправильный подсчет расстояния при несовпадении символов.
-                    <b>Исправление:</b> Убедиться, что переменная <code>distance</code> инкрементируется (<code>distance += 1</code>) внутри условия <code>if s[i] != t[i]:</code>.</li>
-                <li><b>Ошибка:</b> Использование неправильных индексов при обращении к символам строк.
-                    <b>Исправление:</b> Проверка, что индекс <code>i</code> внутри цикла <code>for</code> не выходит за пределы длин строк. В приведённом выше коде эта ошибка отсутствует, так как цикл <code>for i in range(len(s)):</code> гарантирует корректный перебор индексов.</li>
-            </ul>
-            
-            <h3>Выводы</h3>
-            <p>В ходе выполнения лабораторной работы был изучен и реализован алгоритм для вычисления расстояния Хэмминга между двумя строками ДНК равной длины. Программа позволяет определить количество позиций, в которых символы двух строк различаются, что является важным показателем при анализе генетических данных и изучении мутаций. Разработанная программа может быть использована в дальнейшем для решения более сложных задач биоинформатики, связанных с анализом последовательностей ДНК. При реализации алгоритма особое внимание уделялось обработке возможных ошибок, таких как разная длина строк, что повышает надежность и устойчивость разработанной программы.</p>
-            <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/Лаба-1%20в1.py" target="_blank" class="code-link">Скачать код Лабораторной 1</a>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Цели</h3>
+                    <p>Разработать программу для анализа последовательностей ДНК в формате FASTA с целью определения GC-состава (доли гуанина (G) и цитозина (C)) и выявления последовательности с максимальным значением этого показателя..</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи</h3>
+                    <p>Обработка входных данных: Чтение последовательностей ДНК в формате FASTA. Разделение идентификаторов (строки с >) и самих последовательностей. Вычисление GC-состава: Подсчёт количества символов G и C в каждой последовательности. Расчёт доли GC-пар от общей длины последовательности (в процентах). Анализ результатов: Определение последовательности с наибольшим GC-составом. Вывод результатов в заданном формате.</p>
+                </div>
+                <div class="card">
+                    <h3>Инструменты и алгоритмы</h3>
+                    <p>Язык программирования: Python. Структуры данных: Словарь sequences для хранения пар идентификатор: последовательность. Алгоритмы: Чтение данных: Построчная обработка ввода с проверкой на начало идентификатора (>) или последовательности. Расчёт GC-состава: Формула: GC_content = (count('G') + count('C')) / len(sequence) * 100. Поиск максимума: Итерация по словарю с сравнением значений. Форматирование вывода: Округление результатов до двух знаков после запятой (:.2f).</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/лаба2%20(1).py" target="_blank" class="code-link">Лаба 2 - Код</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки</h3>
+                    <p>1. Ошибка: Некорректная обработка многострочных последовательностей. Исправление: Добавление условия для конкатенации строк последовательности к текущему идентификатору. 2. Ошибка: Невнимание к регистру символов (например, g vs G). Исправление: Предполагается, что входные данные в верхнем регистре (по условию задачи).</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Программа успешно обрабатывает до 10 последовательностей ДНК в формате FASTA, вычисляет их GC-состав и определяет последовательность с максимальным значением. Практическое применение: Сравнение геномов разных видов. Идентификация происхождения ДНК (прокариоты vs эукариоты).</p>
+                </div>
+            </div>
         </div>
         
-        <!-- Лаба 1 -->
-        <div id="laba1" class="section hidden">
-            <h2>Лабораторная работа 1: Подсчёт точечных мутаций</h2>
+        <!-- Лаба 3 -->
+        <div id="laba3" class="section hidden">
+            <h2>Лабораторная работа 3</h2>
+            <p>Построение диаграммы рассеяния.Построение графика динамики временных рядов.</p>
             
-            <h3>Цель работы</h3>
-            <p>Разработка программы для вычисления расстояния Хэмминга между двумя строками ДНК равной длины.</p>
-              
-            <h3>Задачи</h3>
-            <ul>
-                <li>Изучить понятие расстояния Хэмминга и его применение в биоинформатике.</li>
-                <li>Реализовать алгоритм для вычисления расстояния Хэмминга между двумя строками ДНК.</li>
-                <li>Протестировать реализованную программу с использованием предоставленных входных данных.</li>
-                <li>Оформить отчёт о проделанной работе.</li>
-            </ul>
-            
-            <h3>Инструменты и алгоритмы</h3>
-            <p><b>Инструменты:</b></p>
-            <ul>
-                <li>Язык программирования: Python.</li>
-                <li>IDE: Visual Studio Code, PyCharm.</li>
-            </ul>
-            <p><b>Алгоритм:</b></p>
-            <ol>
-                <li>Ввод данных: Получение двух строк ДНК (s и t) равной длины.</li>
-                <li>Проверка длины: Убедиться, что длина обеих строк совпадает. Если нет - сообщить об ошибке и остановить выполнение.</li>
-                <li>Вычисление расстояния Хэмминга:
-                    <ul>
-                        <li>Инициализация переменной <code>distance</code> значением 0.</li>
-                        <li>Цикл по символам строк:
-                            <ul>
-                                <li>Если символы на текущей позиции в строках <code>s</code> и <code>t</code> не совпадают, увеличить значение <code>distance</code> на 1.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>Вывод результата: Вывод значения переменной <code>distance</code> в качестве расстояния Хэмминга.</li>
-            </ol>
-            
-            <h3>Ошибки и исправления</h3>
-            <ul>
-                <li><b>Ошибка:</b> Отсутствие проверки на равенство длин строк.
-                    <b>Исправление:</b> Добавление в код проверки <code>if len(s) != len(t):</code> и вывод сообщения об ошибке, если строки имеют разную длину, с прекращением работы функции.</li>
-                    <li><b>Ошибка:</b> Неправильный подсчет расстояния при несовпадении символов.
-                    <b>Исправление:</b> Убедиться, что переменная <code>distance</code> инкрементируется (<code>distance += 1</code>) внутри условия <code>if s[i] != t[i]:</code>.</li>
-                <li><b>Ошибка:</b> Использование неправильных индексов при обращении к символам строк.
-                    <b>Исправление:</b> Проверка, что индекс <code>i</code> внутри цикла <code>for</code> не выходит за пределы длин строк. В приведённом выше коде эта ошибка отсутствует, так как цикл <code>for i in range(len(s)):</code> гарантирует корректный перебор индексов.</li>
-            </ul>
-            
-            <h3>Выводы</h3>
-            <p>В ходе выполнения лабораторной работы был изучен и реализован алгоритм для вычисления расстояния Хэмминга между двумя строками ДНК равной длины. Программа позволяет определить количество позиций, в которых символы двух строк различаются, что является важным показателем при анализе генетических данных и изучении мутаций. Разработанная программа может быть использована в дальнейшем для решения более сложных задач биоинформатики, связанных с анализом последовательностей ДНК. При реализации алгоритма особое внимание уделялось обработке возможных ошибок, таких как разная длина строк, что повышает надежность и устойчивость разработанной программы.</p>
-            <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/Лаба-1%20в1.py" target="_blank" class="code-link">Скачать код Лабораторной 1</a>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Цели</h3>
+                    <p>Освоить методы визуализации данных в Python с использованием библиотеки matplotlib: Построение диаграммы рассеяния для анализа взаимосвязи между признаками и их классификации. Построение графиков временных рядов для изучения динамики изменения данных.</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи для 1 задания</h3>
+                    <p>Загрузить данные (набор Iris). Выбрать два признака для осей X и Y. Визуализировать данные с цветовой дифференциацией по классам. Добавить подписи, легенду и сетку для улучшения читаемости.</p>
+                </div>
+                 <div class="card">
+                    <h3>Задачи для 2 задания</h3>
+                    <p>Загрузить данные (уровень CO₂). Выбрать временной промежуток для анализа. Построить график динамики изменений. Настроить оформление (заголовок, подписи осей, сетку).</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы для 1 задания</h3>
+                    <p>Библиотеки: matplotlib.pyplot для визуализации; sklearn.datasets для загрузки данных Iris. Алгоритм:  1. Загрузка данных: load_iris().  2. Разделение данных по классам: self.y == label.  3. Построение scatter-графика: plt.scatter(). 4. Настройка оформления: plt.xlabel(), plt.legend().</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы для 2 задания</h3>
+                    <p>Библиотеки: matplotlib.pyplot для визуализации; statsmodels.api для загрузки данных CO₂. Алгоритм: 1.Загрузка данных: sm.datasets.co2.load_pandas(). 2.Фильтрация по временному диапазону: self.co2[start_date:end_date]. 3.Построение линейного графика: plt.plot(). 4.Настройка оформления: plt.title(), plt.grid().</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/%23В3задание1.py">Задание 1</a>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/%23В3задание2(2).py" target="_blank" class="code-link">Задание 2</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки для 1 задания</h3>
+                    <p>Ошибка 1: Неверный выбор индексов признаков. Пример: Использование индексов 5 и 6 (выход за границы). Исправление: Проверка диапазона (0 ≤ index < 4). Ошибка 2: Наложение подписей точек. Пример: Перекрывающиеся метки классов. Исправление: Увеличение размера графика (figsize=(12, 8)).</p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки для 2 задания</h3>
+                    <p>Ошибка 1: Пропущенные данные в ряду. Пример: Пробелы в данных CO₂. Исправление: Интерполяция (self.co2.interpolate()). Ошибка 2: Слишком плотная сетка дат. Пример: Нечитаемые подписи на оси X. Исправление: Настройка частоты меток (plt.xticks(rotation=45)).</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Результаты задания 1: Диаграмма рассеяния наглядно показывает кластеры видов ирисов по выбранным признакам. Цветовое разделение упрощает интерпретацию классов. Результаты задания 2: График временного ряда CO₂ демонстрирует устойчивый рост концентрации за выбранный период. Настройка оформления улучшает восприятие динамики. Общие выводы: Библиотека matplotlib предоставляет гибкие инструменты для визуализации данных. Важно учитывать потенциальные ошибки (формат данных, наложение графиков) для корректного отображения.</p>
+                </div>
+            </div>
         </div>
         
         <!-- Лаба 4 -->
@@ -800,6 +817,58 @@
                 behavior: 'smooth'
             });
             
+            // Добавляем эффект волны при переключении
+            if (sectionId !== 'home') {
+                const waveEffect = document.createElement('div');
+                waveEffect.className = 'ocean-waves';
+                waveEffect.style.position = 'absolute';
+                waveEffect.style.bottom = '0';
+                waveEffect.style.left = '0';
+                waveEffect.style.width = '100%';
+                waveEffect.style.height = '100px';
+                waveEffect.style.animation = 'wave 3s ease-out';
+                waveEffect.style.opacity = '0';
+                waveEffect.style.zIndex = '10';
+                
+                document.getElementById(sectionId).appendChild(waveEffect);
+                
+                setTimeout(() => {
+                    waveEffect.style.opacity = '0.3';
+                    setTimeout(() => {
+                        waveEffect.style.opacity = '0';
+                        setTimeout(() => {
+                            waveEffect.remove();
+                        }, 1000);
+                    }, 3000);
+                }, 10);
+            }
+        }
+        
+        // Создаём случайные пузырьки
+        function createBubbles() {
+            const bubblesCount = 8;
+            const body = document.body;
+            
+            for (let i = 0; i < bubblesCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 60 + 20;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 15 + 10;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                bubble.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                body.appendChild(bubble);
+            }
+        }
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
