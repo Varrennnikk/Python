@@ -67,4 +67,4 @@
 
 ## Файлы с кодом
 
-•   [lab3.py](lab3.py)
+[Лаба 3 - код](https://github.com/varrennnikk/Python/blob/лабы/labs/lab3/lab3.py)
