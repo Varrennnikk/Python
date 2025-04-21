@@ -1,7 +1,7 @@
 # Лабораторные работы по Python
 
 ## Файлы с кодом
-- [лаба 1](https://github.com/gulidovalera/laba/blob/лаба-1/Python/Лаба-1%20в1.py) - Лабораторная работа 1
+- [лаба 1](лабы/лаба 1) - Лабораторная работа 1
 - [лаба 2](https://github.com/gulidovalera/laba/blob/лаба-1/Python/лаба2%20(1).py) - Лабораторная работа 2
 - [лаба 3](https://github.com/gulidovalera/laba/blob/лаба-1/Python/%23В3задание2(2).py), [В1задание1(2).py](https://github.com/gulidovalera/laba/blob/лаба-1/В1задание1(2).py) - Лабораторная работа 3
 - [лаба 4](https://github.com/gulidovalera/laba/blob/лаба-1/Python/лаба4_В3%20биопитон%20с%20окном%20для%20файла.py) - Лабораторная работа 4
