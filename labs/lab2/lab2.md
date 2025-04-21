@@ -55,4 +55,4 @@
 
 ## Файлы с кодом
 
-•   [lab2.py](lab2.py)
+[Лаба 2 - код](https://github.com/varrennnikk/Python/blob/лабы/labs/lab2/lab2.py)
