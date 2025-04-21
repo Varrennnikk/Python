@@ -1,73 +1,877 @@
-import requests
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+      <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-class YandexMetrikaAPI:
-    """Класс для работы с API Яндекс Метрики с обработкой ошибок и логированием."""
-    
-    def __init__(self, token, counter_id):
-        if not token or not counter_id:
-            raise ValueError("Токен и ID счётчика должны быть указаны.")
-        self.token = token
-        self.counter_id = counter_id
-        self.base_url = "https://api-metrika.yandex.net/stat/v1/data"
-
-    def get_data(self, metrics, date1="7daysAgo", date2="today"):
-        """Получает данные по указанным метрикам с обработкой ошибок."""
-        params = {
-            "ids": self.counter_id,
-            "metrics": metrics,
-            "date1": date1,
-            "date2": date2
+   ym(100820389, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/100820389" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глубины Python</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --deep-blue: #005b96;
+            --ocean-blue: #0077b6;
+            --light-blue: #00b4d8;
+            --sky-blue: #90e0ef;
+            --foam: #caf0f8;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --wave-height: 120px;
+            --mobile-breakpoint: 768px;
         }
-        headers = {"Authorization": f"OAuth {self.token}"}
+        
+        * {
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--deep-blue), var(--ocean-blue));
+            color: white;
+            min-height: 100vh;
+            display: flex;
+                        flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(0, 91, 150, 0.85);
+            width: 100%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 10;
+            border-bottom: 1px solid rgba(202, 240, 248, 0.1);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, var(--sky-blue), var(--foam));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--light-blue), var(--sky-blue));
+            border-radius: 3px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(0, 119, 182, 0.95);
+            padding: 10px;
+                        width: 100%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 9;
+        }
+        
+        nav a {
+            color: var(--foam);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 30px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease, transform 0.2s ease;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            background-color: rgba(0, 180, 216, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.5);
+            color: white;
+        }
+        
+        nav a:hover::before {
+            left: 100%;
+        }
+        
+        nav a.active {
+            background-color: var(--light-blue);
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.6);
+        }
+        
+        main {
+            width: 95%;
+                        max-width: 1200px;
+            margin: 30px auto;
+            opacity: 1;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 5;
+            flex: 1;
+            padding: 0 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .buttons button {
+            background: linear-gradient(135deg, var(--light-blue), var(--ocean-blue));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            min-width: 180px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            flex: 1 1 180px;
+            max-width: 250px;
+        }
+        
+        .buttons button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .buttons button:hover {
+            transform: translateY(-7px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 180, 216, 0.5);
+            background: linear-gradient(135deg, var(--sky-blue), var(--light-blue));
+        }
+        
+        .buttons button:hover::after {
+            animation: shine 1.5s infinite;
+        }
+        
+        @keyframes shine {
+            100% { transform: translateX(100%); }
+        }
+        
+        .section {
+            background: rgba(0, 91, 150, 0.75);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(144, 224, 239, 0.1) 0%, transparent 70%);
+        }
+        
+        .section h2 {
+            margin-top: 0;
+            color: var(--sky-blue);
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-family: 'Playfair Display', serif;
+            border-bottom: 3px solid var(--light-blue);
+            padding-bottom: 10px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+                    }
+        
+        .section p {
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            margin-bottom: 20px;
+        }
+        
+        .section a {
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .section a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--sky-blue);
+            transition: var(--transition);
+        }
+        
+        .section a:hover {
+            color: var(--foam);
+            text-shadow: 0 0 5px rgba(202, 240, 248, 0.5);
+        }
+        
+        .section a:hover::after {
+            width: 100%;
+        }
+        
+        footer {
+            margin-top: auto;
+            text-align: center;
+            background: rgba(0, 91, 150, 0.95);
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 5;
+            border-top: 1px solid rgba(202, 240, 248, 0.1);
+        }
+        
+        footer p {
+            margin: 0;
+                        font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: var(--foam);
+            letter-spacing: 0.5px;
+        }
+        
+        .hidden {
+            display: none;
+            opacity: 0;
+        }
+        
+        /* Анимация волн для фона */
+        .ocean-waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--wave-height);
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(202, 240, 248, 0.25)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: repeat-x;
+            z-index: 1;
+            animation: wave 15s linear infinite;
+        }
+        
+        .ocean-waves:nth-child(2) {
+            bottom: -20px;
+            opacity: 0.5;
+            animation: wave 12s linear infinite reverse;
+            height: calc(var(--wave-height) + 20px);
+        }
+        
+        .ocean-waves:nth-child(3) {
+            bottom: -40px;
+            opacity: 0.3;
+            animation: wave 18s linear infinite;
+            height: calc(var(--wave-height) + 40px);
+        }
+        
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1440px; }
+        }
+        
+        /* Декоративные элементы */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(202, 240, 248, 0.15);
+            z-index: -1;
+        }
+                
+        .bubble-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 5%;
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        .bubble-2 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 8%;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+        
+        .bubble-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 30%;
+            left: 10%;
+            animation: float 20s ease-in-out infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Карточки для разделов */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: rgba(0, 119, 182, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(202, 240, 248, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+                .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 119, 182, 0.8);
+        }
+        
+        .card h3 {
+            color: var(--sky-blue);
+            margin-top: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card p {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: 15px;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(144, 224, 239, 0.1) 0%, transparent 70%);
+            transition: all 0.6s ease;
+        }
+        
+        .card:hover::before {
+            top: 0;
+            right: 0;
+        }
+        
+        /* Анимация для кода */
+        .code-link {
+            display: inline-block;
+            margin: 8px 12px 8px 0;
+            padding: 10px 15px;
+            background: rgba(0, 119, 182, 0.4);
+            border-radius: 6px;
+            border-left: 4px solid var(--light-blue);
+            transition: all 0.3s ease;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
 
-        try:
-            response = requests.get(self.base_url, params=params, headers=headers)
-            response.raise_for_status()  # Проверяем статус ответа
-            data = response.json()
+                .code-link:hover {
+            background: rgba(0, 119, 182, 0.7);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+        }
+        
+        /* Мобильное меню */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 15px;
+            }
             
-            if "data" not in data or not data["data"]:
-                print("⚠ API вернул пустой ответ или данные недоступны.")
-                return None
+            nav {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 91, 150, 0.95);
+                z-index: 15;
+                padding-top: 80px;
+                align-items: center;
+            }
             
-            return data
-        except requests.exceptions.RequestException as e:
-            print(f"🚨 Ошибка запроса к API: {e}")
-            return None
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                margin: 10px 0;
+                padding: 12px 25px;
+                font-size: 1.2rem;
+            }
+                        
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section {
+                padding: 20px 15px;
+                border-radius: 10px;
+            }
+            
+            .buttons button {
+                padding: 12px 20px;
+                min-width: 160px;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .bubble-1, .bubble-2, .bubble-3 {
+                display: none;
+            }
+            
+            .ocean-waves {
+                height: 80px;
+            }
+        }
+        
+        /* Улучшения для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .buttons button {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .code-link {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Декоративные элементы -->
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
 
-    def get_visits(self):
-        """Получает количество визитов на сайт."""
-        return self.get_data("ym:s:visits")
-
-    def get_views(self):
-        """Получает количество просмотров страниц."""
-        return self.get_data("ym:s:pageviews")
-
-    def get_visitors(self):
-        """Получает количество уникальных посетителей."""
-        return self.get_data("ym:s:users")
-
-# Использование класса
-TOKEN = "y0__xDFm9qlBxjc4jYghcqK4BJOfGYNW_b7OLiPqZ4BTi-gU7CfzA"
-COUNTER_ID = 100820389  # Убедись, что это число!
-
-api = YandexMetrikaAPI(TOKEN, COUNTER_ID)
-
-# Получаем данные в формате JSON
-metrics = {
-    "Визиты": api.get_visits(),
-    "Просмотры": api.get_views(),
-    "Посетители": api.get_visitors()
-}
-
-# Вывод JSON-ответа (полные данные)
-print("\n🔹 Полные данные от API (JSON):")
-for metric, value in metrics.items():
-    print(f"{metric}: {value}")
-
-# Вывод чистых значений (удобочитаемый формат)
-print("\n🔹 Чистые значения:")
-for metric, value in metrics.items():
-    if value and "data" in value and value["data"]:
-        print(f"{metric}: {value['data'][0]['metrics'][0]}")
-    else:
-        print(f"⚠ Данные {metric} недоступны.")
+        <!-- Волны -->
+    <div class="ocean-waves"></div>
+    <div class="ocean-waves"></div>
+    <div class="ocean-waves"></div>
+    
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <header>
+        <h1>Морские глубины Python</h1>
+    </header>
+    <nav id="mainNav">
+        <a href="#" onclick="showSection('home')" class="active">Главная</a>
+        <a href="#" onclick="showSection('laba1')">Лаба 1</a>
+        <a href="#" onclick="showSection('laba2')">Лаба 2</a>
+        <a href="#" onclick="showSection('laba3')">Лаба 3</a>
+        <a href="#" onclick="showSection('laba4')">Лаба 4</a>
+    </nav>
+    <main>
+        <!-- Главная страница -->
+        <div id="home" class="section">
+            <h2>Исследуйте лабораторные работы</h2>
+            <p>Добро пожаловать в подводный мир программирования на Python. Выберите лабораторную работу, чтобы начать своё погружение в глубины кода.</p>
+            
+            <div class="buttons">
+                <button onclick="showSection('laba1')">
+                    <i class="fas fa-flask"></i> Лаба 1
+                </button>
+                <button onclick="showSection('laba2')">
+                    <i class="fas fa-vial"></i> Лаба 2
+                </button>
+                <button onclick="showSection('laba3')">
+                    <i class="fas fa-atom"></i> Лаба 3
+                </button>
+                <button onclick="showSection('laba4')">
+                    <i class="fas fa-microscope"></i> Лаба 4
+                </button>
+            </div>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3>Лаба 1</h3>
+                    <p>Основные операторы и конструкции Python.</p>
+                </div>
+                <div class="card">
+                    <h3>Лаба 2</h3>
+                    <p>Работа с файлами в Python.</p>
+                </div>
+                <div class="card">
+                                    <h3>Лаба 3</h3>
+                    <p>Представление данных в Python.</p>
+                </div>
+                <div class="card">
+                    <h3>Лаба 4</h3>
+                    <p>Работа с Biopython.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Лаба 1 -->
+        <div id="laba1" class="section hidden">
+            <h2>Лабораторная работа 1</h2>
+            <p>Кролики и рекуррентные отношения</p>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3>Цели</h3>
+                    <p>Исследование динамики роста популяции кроликов по модели Фибоначчи с модификацией, учитывающей рождение k пар кроликов в помёте. Реализация алгоритма для вычисления численности популяции на n-ый месяц с использованием динамического программирования.</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи</h3>
+                    <p>Анализ классической задачи Фибоначчи о размножении кроликов. Модификация модели: 
+                        1) Учёт параметра k (количество пар в помёте). 
+                        2) Обобщение рекуррентного соотношения: F_n = F_{n-1} + k * F_{n-2}. 
+                        3) Реализация алгоритма на Python для вычисления числа пар кроликов. 
+                        4) Тестирование программы на примере входных данных (n=5, k=3).</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы</h3>
+                    <p>Язык программирования: Python. 
+                        Алгоритм: Динамическое программирование для избежания рекурсивных вычислений. 
+                        Использование списка F для хранения промежуточных результатов. 
+                        Итеративное заполнение списка по формуле: F[i] = F[i-1] + k * F[i-2]. 
+                        Структура программы: Функция rabbit_pairs(n, k) вычисляет результат. 
+                        Ввод данных через input().split(). 
+                        Вывод итогового значения.</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/Лаба-1%20в1.py" target="_blank" class="code-link">Лаба 1 - Код</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки</h3>
+                    <p> Ошибка: Невнимание к индексации месяцев (месяцы начинаются с 1, а не 0). Исправление: Создание списка размером n+1 для удобства работы.</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Модель Фибоначчи успешно обобщена для случая рождения k пар кроликов. 
+                        Динамическое программирование позволило эффективно решить задачу без рекурсии (сложность O(n)). 
+                        Программа корректно работает для n ≤ 40 и k ≤ 5, что соответствует условиям задачи. 
+                        Практическое применение: анализ экологических систем (например, инвазивные виды, как кролики в Австралии).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Лаба 2 -->
+        <div id="laba2" class="section hidden">
+            <h2>Лабораторная работа 2</h2>
+            <p>Вычисление GC-состава.</p>
+            
+            <div class="card-container">
+                <div class="card">
+                                    <h3>Цели</h3>
+                    <p>Разработать программу для анализа последовательностей ДНК в формате FASTA с целью определения GC-состава (доли гуанина (G) и цитозина (C)) и выявления последовательности с максимальным значением этого показателя..</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи</h3>
+                    <p>Обработка входных данных: Чтение последовательностей ДНК в формате FASTA. Разделение идентификаторов (строки с >) и самих последовательностей. Вычисление GC-состава: Подсчёт количества символов G и C в каждой последовательности. Расчёт доли GC-пар от общей длины последовательности (в процентах). Анализ результатов: Определение последовательности с наибольшим GC-составом. Вывод результатов в заданном формате.</p>
+                </div>
+                <div class="card">
+                    <h3>Инструменты и алгоритмы</h3>
+                    <p>Язык программирования: Python. Структуры данных: Словарь sequences для хранения пар идентификатор: последовательность. Алгоритмы: Чтение данных: Построчная обработка ввода с проверкой на начало идентификатора (>) или последовательности. Расчёт GC-состава: Формула: GC_content = (count('G') + count('C')) / len(sequence) * 100. Поиск максимума: Итерация по словарю с сравнением значений. Форматирование вывода: Округление результатов до двух знаков после запятой (:.2f).</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/лаба2%20(1).py">Лаба 2 - Код</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки</h3>
+                    <p>1. Ошибка: Некорректная обработка многострочных последовательностей. Исправление: Добавление условия для конкатенации строк последовательности к текущему идентификатору. 2. Ошибка: Невнимание к регистру символов (например, g vs G). Исправление: Предполагается, что входные данные в верхнем регистре (по условию задачи).</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Программа успешно обрабатывает до 10 последовательностей ДНК в формате FASTA, вычисляет их GC-состав и определяет последовательность с максимальным значением. Практическое применение: Сравнение геномов разных видов. Идентификация происхождения ДНК (прокариоты vs эукариоты).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Лаба 3 -->
+        <div id="laba3" class="section hidden">
+            <h2>Лабораторная работа 3</h2>
+            <p>Построение диаграммы рассеяния.Построение графика динамики временных рядов.</p>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3>Цели</h3>
+                    <p>Освоить методы визуализации данных в Python с использованием библиотеки matplotlib: Построение диаграммы рассеяния для анализа взаимосвязи между признаками и их классификации. Построение графиков временных рядов для изучения динамики изменения данных.</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи для 1 задания</h3>
+                    <p>Загрузить данные (набор Iris). Выбрать два признака для осей X и Y. Визуализировать данные с цветовой дифференциацией по классам. Добавить подписи, легенду и сетку для улучшения читаемости.</p>
+                </div>
+                 <div class="card">
+                    <h3>Задачи для 2 задания</h3>
+                    <p>Загрузить данные (уровень CO₂). Выбрать временной промежуток для анализа. Построить график динамики изменений. Настроить оформление (заголовок, подписи осей, сетку).</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы для 1 задания</h3>
+                    <p>Библиотеки: matplotlib.pyplot для визуализации; sklearn.datasets для загрузки данных Iris. Алгоритм:  1. Загрузка данных: load_iris().  2. Разделение данных по классам: self.y == label.  3. Построение scatter-графика: plt.scatter(). 4. Настройка оформления: plt.xlabel(), plt.legend().</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы для 2 задания</h3>
+                    <p>Библиотеки: matplotlib.pyplot для визуализации; statsmodels.api для загрузки данных CO₂. Алгоритм: 1.Загрузка данных: sm.datasets.co2.load_pandas(). 2.Фильтрация по временному диапазону: self.co2[start_date:end_date]. 3.Построение линейного графика: plt.plot(). 4.Настройка оформления: plt.title(), plt.grid().</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                                            <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/%23В3задание1.py">Задание 1</a>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/%23В3задание2(2).py" target="_blank" class="code-link">Задание 2</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки для 1 задания</h3>
+                    <p>Ошибка 1: Неверный выбор индексов признаков. Пример: Использование индексов 5 и 6 (выход за границы). Исправление: Проверка диапазона (0 ≤ index < 4). Ошибка 2: Наложение подписей точек. Пример: Перекрывающиеся метки классов. Исправление: Увеличение размера графика (figsize=(12, 8)).</p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки для 2 задания</h3>
+                    <p>Ошибка 1: Пропущенные данные в ряду. Пример: Пробелы в данных CO₂. Исправление: Интерполяция (self.co2.interpolate()). Ошибка 2: Слишком плотная сетка дат. Пример: Нечитаемые подписи на оси X. Исправление: Настройка частоты меток (plt.xticks(rotation=45)).</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Результаты задания 1: Диаграмма рассеяния наглядно показывает кластеры видов ирисов по выбранным признакам. Цветовое разделение упрощает интерпретацию классов. Результаты задания 2: График временного ряда CO₂ демонстрирует устойчивый рост концентрации за выбранный период. Настройка оформления улучшает восприятие динамики. Общие выводы: Библиотека matplotlib предоставляет гибкие инструменты для визуализации данных. Важно учитывать потенциальные ошибки (формат данных, наложение графиков) для корректного отображения.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Лаба 4 -->
+        <div id="laba4" class="section hidden">
+            <h2>Лабораторная работа 4</h2>
+            <p>BIOPYTHON.</p>
+            
+            <div class="card-container">
+                <div class="card">
+                    <h3>Цели</h3>
+                    <p>Освоить методы обработки биологических данных в формате GenBank с использованием библиотеки BioPython: Создание и объединение файлов GenBank с кодирующими последовательностями (CDS) для двух биологических видов. Анализ GC-состава последовательностей и их сортировка. Трансляция кодирующих областей в белковые последовательности.</p>
+                </div>
+                <div class="card">
+                    <h3>Задачи</h3>
+                    <p>Задание 1. Формирование исходного файла. Загрузить по 5 CDS-последовательностей для двух видов с NCBI в формате GenBank. Объединить записи в единый файл средствами BioPython. Проверить, что итоговый файл содержит не менее 10 CDS. Задание 2. Анализ GC-составов. Прочитать файл GenBank, извлечь последовательности. Вычислить GC-состав для каждой последовательности. Отсортировать последовательности по возрастанию GC-состава. Вывести результаты с указанием ID, описания и значения GC. Задание 3. Трансляция. Извлечь кодирующие области (CDS) из файла GenBank. Транслировать нуклеотидные последовательности в аминокислотные. Вывести белковые последовательности с указанием исходных CDS.</p>
+                </div>
+                 <div class="card">
+                    <h3>Инструменты и алгоритмы</h3>
+                    <p>Задание 1 Библиотеки: Bio.SeqIO для чтения/записи GenBank-файлов. Алгоритм: Скачивание данных с NCBI (вручную). Объединение файлов через SeqIO.write(records, "output.gb", "genbank"). Задание 2 Библиотеки: Bio.SeqIO для парсинга GenBank.tkinter для GUI. Алгоритм: Чтение файла: SeqIO.parse(filename, "genbank"). Расчет GC-состава: gc_content = (seq.count("G") + seq.count("C")) / len(seq).  Сортировка: sorted(sequences, key=lambda x: x[2]). Задание 3 Библиотеки: Bio.Seq для трансляции. Алгоритм: Извлечение CDS из записей GenBank. Трансляция: seq.translate(table="стандартный_код").</p>
+                </div>
+                <div class="card">
+                    <h3>Код</h3>
+                    <p>
+                        <a href="https://github.com/gulidovalera/laba/blob/лаба-1/Python/лаба4_В3%20биопитон%20с%20окном%20для%20файла.py" target="_blank" class="code-link">Лаба 4 - Код</a>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Ошибки</h3>
+                    <p>Задание 1 Ошибка: Несовместимость форматов файлов от разных видов.Исправление: Проверка и конвертация в единый формат GenBank.
+                    Задание 2 Ошибка: Некорректный расчет GC для пустых последовательностей. Исправление: Добавление проверки if len(seq) > 0.
+                    Задание 3 Ошибка: Трансляция некодирующих областей. Исправление: Извлечение только CDS-фрагментов.</p>
+                </div>
+                 <div class="card">
+                    <h3>Выводы</h3>
+                    <p>Успешно создан объединенный GenBank-файл с 10+ CDS. Реализован расчет и сортировка GC-составов с выводом в GUI. Получены белковые последовательности через трансляцию CDS.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Подводный мир Python. Все права защищены.</p>
+    </footer>
+    
+    <script>
+            function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                    }, 10);
+                } else {
+                    section.style.opacity = '0';
+                    setTimeout(() => {
+                        if (section.id !== sectionId) {
+                            section.style.display = 'none';
+                        }
+                    }, 400);
+                }
+            });
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Плавная прокрутка к верху страницы
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Добавляем эффект волны при переключении
+            if (sectionId !== 'home') {
+                const waveEffect = document.createElement('div');
+                waveEffect.className = 'ocean-waves';
+                waveEffect.style.position = 'absolute';
+                waveEffect.style.bottom = '0';
+                waveEffect.style.left = '0';
+                waveEffect.style.width = '100%';
+                waveEffect.style.height = '100px';
+                waveEffect.style.animation = 'wave 3s ease-out';
+                waveEffect.style.opacity = '0';
+                waveEffect.style.zIndex = '10';
+                
+                document.getElementById(sectionId).appendChild(waveEffect);
+                
+                setTimeout(() => {
+                    waveEffect.style.opacity = '0.3';
+                    setTimeout(() => {
+                        waveEffect.style.opacity = '0';
+                        setTimeout(() => {
+                            waveEffect.remove();
+                        }, 1000);
+                    }, 3000);
+                }, 10);
+            }
+        }
+        
+        // Создаём случайные пузырьки
+        function createBubbles() {
+            const bubblesCount = 8;
+            const body = document.body;
+            
+            for (let i = 0; i < bubblesCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 60 + 20;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 15 + 10;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                bubble.style.opacity = Math.random() * 0.3 + 0.1;
+                
+                body.appendChild(bubble);
+            }
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            createBubbles();
+        });
+    </script>
+</body>
+</html>
